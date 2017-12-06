@@ -1,0 +1,13 @@
+<%= form_for([@book, @book.parts.build]) do |f| %>
+  <div class="field">
+    <%= f.label :part_number %><br />
+    <%= f.text_field :part_number %>
+  </div>
+  <div class="field">
+    <%= f.label :title %><br />
+    <%= f.text_field :title %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

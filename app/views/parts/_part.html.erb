@@ -1,0 +1,15 @@
+<p>
+  <b>part number:</b>
+  <%= part.part_number %>
+</p>
+ 
+<p>
+  <b>title:</b>
+  <%= part.title %>
+</p>
+ 
+<p>
+  <%= link_to 'Destroy part', [part.book, part],
+               :confirm => 'Are you sure?',
+               :method => :delete %>
+</p>

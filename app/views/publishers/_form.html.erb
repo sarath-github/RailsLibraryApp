@@ -1,0 +1,21 @@
+<%= form_for(@publisher) do |publisher_form| %>
+  <% if @publisher.errors.any? %>
+  <div id="errorExplanation">
+    <h2><%= pluralize(@publisher.errors.count, "error") %> prohibited this publisher from being saved:</h2>
+    <ul>
+    <% @publisher.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+  
+  <% end %>
+ 
+  <div class="field">
+    <%= publisher_form.label :name %><br />
+    <%= publisher_form.text_field :name %>
+  </div>
+  <div class="actions">
+    <%= publisher_form.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,38 @@
+<p id="notice"><%= notice %></p>
+ 
+<p>
+  <b>Name:</b>
+  <%= @book.name %>
+</p>
+ 
+<p>
+  <b>Description:</b>
+  <%= @book.description %>
+</p>
+
+<p>
+	<b>Author:</b>
+	<%= @book.author %>
+</p>
+ 
+<p>
+  <b>Price:</b>
+  <%= @book.price %>
+</p>
+
+<p>
+	<b>Publisher:</b>
+  <% if @book.publisher.present? %>
+	<%= @book.publisher.name %>
+  <% end %>
+</p>
+
+<h2>Parts</h2>
+<%= render @book.parts %>
+ 
+<h2>Add a part:</h2>
+<%= render "parts/form" %>
+ 
+ 
+<%= link_to 'Edit book', edit_book_path(@book) %> |
+<%= link_to 'Back to books', books_path %> |

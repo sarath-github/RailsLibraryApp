@@ -1,0 +1,46 @@
+<h1>Listing books</h1>
+<!-- 
+<label>
+	Search :
+	<input type="text" name="SearchBox" value="Enter search text">
+</label>
+<%= link_to 'search' , 'books/new' %> -->
+<form><input type="text" name="SearchTextBox"><input type="submit" name=""  value="search" style="width:5%" formaction="books"></form>
+<table border="1">
+  <tr>
+    <th align='center'><form><input name="sort" type="submit" value="Name" style="width:100%" formaction="books"></form></th>
+    <th align='center'><form><input name="sort" type=submit value="Description" style="width:100%" formaction="books"></form></th>
+    <th align='center'><form><input name="sort" type=submit value="Author" style="width:100%" formaction="books"></form></th>
+    <th align="center">Publisher</th>
+    <th align='center'><form><input name="sort" type=submit value="Price" style="width:100%" formaction="books"></form></th>
+    <th align="center">QR Code</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @books.each do |book| %>
+  <tr>
+    <td><%= book.name %></td>
+    <td><%= book.description %></td>
+    <td><%= book.author %></td>
+    <td><% if book.publisher.present? %>
+            <%= book.publisher.name %>
+        <% else %>
+            <% "" %>
+        <% end %>
+    </td>
+    <td><%= book.price %></td>
+    <td><img src = "data:image/png;base64,<%=book.barcode%>" alt="QR not available" border="3" height="100" width="100"/></td>
+    <td><%= link_to 'Show', book %></td>
+    <td><%= link_to 'Edit', edit_book_path(book) %></td>
+    <td><%= link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New book', new_book_path , class: 'button'%> <br/>
+<%= link_to "publisher", publishers_path %>
+
