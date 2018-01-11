@@ -11,6 +11,8 @@ gem 'dynamic_form'
 gem 'barby',  '~> 0.6.2'
 gem 'rqrcode','~> 0.4.2'
 gem 'chunky_png'
+gem 'elasticsearch-model'
+gem 'elasticsearch-rails'
 
 
 # Gems used only for assets and not required

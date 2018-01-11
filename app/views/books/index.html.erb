@@ -5,7 +5,15 @@
 	<input type="text" name="SearchBox" value="Enter search text">
 </label>
 <%= link_to 'search' , 'books/new' %> -->
-<form><input type="text" name="SearchTextBox"><input type="submit" name=""  value="search" style="width:5%" formaction="books"></form>
+<!--<%= form_for action=search_path, method: :get do |f| %>
+  <p>
+    <%= f.label "Search for" %>
+    <%= text_field_tag :q, params[:q] %>
+    <%= submit_tag "Go", name: nil  %>
+  </p>
+<% end %>-->
+<form><input type="text" name="q"><input type="submit" name=""  value="search" style="width:5%" formaction="search"></form>
+
 <table border="1">
   <tr>
     <th align='center'><form><input name="sort" type="submit" value="Name" style="width:100%" formaction="books"></form></th>
@@ -41,6 +49,7 @@
 
 <br />
 
+<%= link_to 'Search', search_path %>
 <%= link_to 'New book', new_book_path , class: 'button'%> <br/>
 <%= link_to "publisher", publishers_path %>
 

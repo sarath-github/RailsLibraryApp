@@ -11,9 +11,7 @@ class BooksController < ApplicationController
       @books = Book.sort(session[:current_session_sort_info], 'ASC')
       print "Sort info: ",session[:current_session_sort_info]
     end
-    if !params['SearchTextBox'].blank?
-      @books = Book.search(params['SearchTextBox'])
-    end 
+    
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @books }

@@ -11,17 +11,19 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20171206113041) do
+ActiveRecord::Schema.define(:version => 20180111114827) do
 
   create_table "books", :force => true do |t|
     t.string   "name"
     t.text     "description"
     t.float    "price"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
     t.string   "author"
     t.integer  "publisher_id"
     t.text     "barcode"
+    t.integer  "total_copies",     :default => 1
+    t.integer  "available_copies", :default => 1
   end
 
   create_table "parts", :force => true do |t|
