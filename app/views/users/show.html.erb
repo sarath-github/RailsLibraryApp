@@ -1,0 +1,32 @@
+<h1 align="center">Welcome to library <%= @user.name %></h1>
+
+<h1 align="center">Listing books</h1>
+<table border="1" align="center" style="width: 1000px;">
+  <tr>
+    <th align='center'>Name</th>
+    <th align='center'>Description</th>
+    <th align='center'>Author</th>
+    <th align="center">Publisher</th>
+    <th align="center" style="width: 100px;">QR Code</th>
+  </tr>
+
+<% @books.each do |book| %>
+  <tr>
+    <td><%= book.name %></td>
+    <td><%= book.description %></td>
+    <td><%= book.author %></td>
+    <td><% if book.publisher.present? %>
+            <%= book.publisher.name %>
+        <% else %>
+            <% "" %>
+        <% end %>
+    </td>
+    <td><img src = "data:image/png;base64,<%=book.barcode%>" alt="QR not available" border="3" height="100" width="100"/></td>
+  </tr>
+<% end %>
+</table>
+<FORM METHOD="GET" ACTION="history">
+<p style="width: 1200px;" align="center"><input type="submit" name="user_id" value="<%= @user.id %>" align="center" style="width: 150px;"></p>
+</FORM>
+<br />
+

@@ -21,6 +21,11 @@
 </p>
 
 <p>
+  <b>Total Copies:</b>
+  <%= @book.total_copies %>
+</p>
+
+<p>
 	<b>Publisher:</b>
   <% if @book.publisher.present? %>
 	<%= @book.publisher.name %>

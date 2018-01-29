@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20180111114827) do
+ActiveRecord::Schema.define(:version => 20180128214621) do
 
   create_table "books", :force => true do |t|
     t.string   "name"
@@ -24,6 +24,15 @@ ActiveRecord::Schema.define(:version => 20180111114827) do
     t.text     "barcode"
     t.integer  "total_copies",     :default => 1
     t.integer  "available_copies", :default => 1
+  end
+
+  create_table "books_takens", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "book_id"
+    t.datetime "check_out_time"
+    t.datetime "check_in_time"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
   end
 
   create_table "parts", :force => true do |t|
@@ -40,6 +49,21 @@ ActiveRecord::Schema.define(:version => 20180111114827) do
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "user_activities", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  create_table "users", :force => true do |t|
+    t.string   "name",       :default => "",    :null => false
+    t.text     "password",                      :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+    t.boolean  "isadmin",    :default => false, :null => false
   end
 
 end

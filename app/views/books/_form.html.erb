@@ -27,10 +27,14 @@
   <div>
     <%= book_form.label :publisher %><br />
     <%= book_form.collection_select(:publisher_id, Publisher.all, :id, :name ) %>
-</div>
+  </div>
   <div class="field">
     <%= book_form.label :price %><br />
     <%= book_form.text_field :price %>
+  </div>
+  <div class="field"> 
+    <%= book_form.label :total_copies %><br />
+    <%= book_form.text_field :total_copies %>
   </div>
   <div class="actions">
     <%= book_form.submit %>

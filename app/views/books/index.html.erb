@@ -1,4 +1,13 @@
-<h1>Listing books</h1>
+<style>
+    INPUT, SELECT {
+      width:100%;
+    }
+    .field-title {
+      width:100px;
+    }
+</style>
+
+<h1 align="center">Listing books</h1>
 <!-- 
 <label>
 	Search :
@@ -12,43 +21,47 @@
     <%= submit_tag "Go", name: nil  %>
   </p>
 <% end %>-->
-<form><input type="text" name="q"><input type="submit" name=""  value="search" style="width:5%" formaction="search"></form>
+<form align="center"><input type="text" name="q" style="width: 150px;" align="center"><input type="submit" name=""  value="search" style="width: 100px;" formaction="search"></form>
 
-<table border="1">
+<table border="2", style="width:1000px;", align="center">
   <tr>
-    <th align='center'><form><input name="sort" type="submit" value="Name" style="width:100%" formaction="books"></form></th>
-    <th align='center'><form><input name="sort" type=submit value="Description" style="width:100%" formaction="books"></form></th>
-    <th align='center'><form><input name="sort" type=submit value="Author" style="width:100%" formaction="books"></form></th>
-    <th align="center">Publisher</th>
-    <th align='center'><form><input name="sort" type=submit value="Price" style="width:100%" formaction="books"></form></th>
-    <th align="center">QR Code</th>
-    <th></th>
-    <th></th>
-    <th></th>
+    <th align='center', class="field-title"><form><input name="sort" type="submit" value="Name" style="width:100%" formaction="books"></form></th>
+    <th align='center', class="field-title"><form><input name="sort" type=submit value="Description" style="width:100%" formaction="books"></form></th>
+    <th align='center', class="field-title"><form><input name="sort" type=submit value="Author" style="width:100%" formaction="books"></form></th>
+    <th align="center", class="field-title">Total Copies</th>
+    <th align="center", class="field-title">Publisher</th>
+    <th align='center', class="field-title"><form><input name="sort" type=submit value="Price" style="width:100%" formaction="books"></form></th>
+    <th align="center", class="field-title">QR Code</th>
+    <th class="field-title", border="0"></th>
+    <th class="field-title"></th>
+    <th class="field-title"></th>
   </tr>
 
 <% @books.each do |book| %>
   <tr>
-    <td><%= book.name %></td>
-    <td><%= book.description %></td>
-    <td><%= book.author %></td>
-    <td><% if book.publisher.present? %>
+    <td class="field-title"><%= book.name %></td>
+    <td class="field-title"><%= book.description %></td>
+    <td class="field-title"><%= book.author %></td>
+    <td class="field-title"><%= book.total_copies %></td>
+    <td class="field-title"><% if book.publisher.present? %>
             <%= book.publisher.name %>
         <% else %>
             <% "" %>
         <% end %>
     </td>
-    <td><%= book.price %></td>
-    <td><img src = "data:image/png;base64,<%=book.barcode%>" alt="QR not available" border="3" height="100" width="100"/></td>
-    <td><%= link_to 'Show', book %></td>
-    <td><%= link_to 'Edit', edit_book_path(book) %></td>
-    <td><%= link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td class="field-title"><%= book.price %></td>
+    <td class="field-title"><img src = "data:image/png;base64,<%=book.barcode%>" alt="QR not available" border="1" height="100" width="100"/></td>
+    <td class="field-title", border="0"><%= link_to 'Show', book %></td>
+    <td class="field-title", border="0"><%= link_to 'Edit', edit_book_path(book) %></td>
+    <td class="field-title"><%= link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
+<%= link_to 'Check Out Books', '/books/checkout' %>
+<%= link_to 'Check in Books', '/books/checkin' %>
 <%= link_to 'Search', search_path %>
 <%= link_to 'New book', new_book_path , class: 'button'%> <br/>
 <%= link_to "publisher", publishers_path %>

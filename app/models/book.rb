@@ -9,7 +9,7 @@ class Book < ActiveRecord::Base
   include Elasticsearch::Model
   include Elasticsearch::Model::Callbacks
   before_save :generate_qr
-  attr_accessible :description, :name, :price, :author, :publisher_id, :barcode
+  attr_accessible :description, :name, :price, :author, :publisher_id, :barcode, :total_copies, :available_copies
 
   settings index: { number_of_shards: 1 } do
     mappings dynamic: 'false' do
@@ -22,6 +22,7 @@ class Book < ActiveRecord::Base
   validates :description , :presence => true
   validates_numericality_of :price, :on => :create
   validates :author, :presence => true
+  validates :total_copies, :presence => true, numericality: { only_integer: true }
 
   has_many :parts
   belongs_to :publisher

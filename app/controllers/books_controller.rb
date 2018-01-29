@@ -85,11 +85,75 @@ class BooksController < ApplicationController
     end
   end
 
+  def checkout
+    @books = Book.where("available_copies > ?", 0)
+    @users = User.all
+  end
+
+  def docheckout
+    print params[:tag_ids]
+    @selectedbooks = params[:tag_ids]
+    @user = User.find(params[:user_id].to_i)
+    @selectedbooks.each do |selectedbook|
+      @book = Book.find(selectedbook.to_i)
+      @book.available_copies = @book.available_copies - 1
+      @book.save
+      @booktaken = BooksTaken.new
+      @booktaken.user_id = @user.id
+      @booktaken.book_id = @book.id
+      @booktaken.check_out_time = Time.now
+      @booktaken.save
+      @activity = UserActivitie.new
+      @activity.user_id = @user.id
+      @activity.description = "Taken Book #{@book.name} at #{@booktaken.check_out_time}"
+      @activity.save
+      print @book.available_copies
+    end
+    respond_to do |format|
+      if true
+        format.html { redirect_to books_url, notice: 'book was successfully updated.' }
+        format.json { head :no_content }
+      end
+    end
+  end
+
+  def checkin
+    @books = Book.all
+    @users = User.all
+  end
+
+  def docheckin
+    @selectedbooks = params[:tag_ids]
+    @user = User.find(params[:user_id].to_i)
+    @selectedbooks.each do |selectedbook|
+      @book = Book.find(selectedbook.to_i)
+      @book.available_copies = @book.available_copies + 1
+      @book.save
+      @booktaken = BooksTaken.new
+      @booktaken.user_id = @user.id
+      @booktaken.book_id = @book.id
+      @booktaken.check_in_time = Time.now
+      @booktaken.save
+      @activity = UserActivitie.new
+      @activity.user_id = @user.id
+      @activity.description = "Returened Book #{@book.name} at #{@booktaken.check_in_time}"
+      @activity.save
+    end
+    respond_to do |format|
+      format.html { redirect_to books_url, notice: 'book was checked in successfully.'}
+      format.json {head :no_content}
+    end
+  end
+
   def search
   end
 
   def load_book
     @book = Book.find(params[:id])
+  end
+
+  def bookstouser
+    @book = Book.all
   end
 end
 

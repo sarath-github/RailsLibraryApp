@@ -1,0 +1,46 @@
+<style>
+    INPUT, SELECT {
+      width:100%;
+    }
+    .field-title {
+      width:100px;
+    }
+</style>
+
+<h1 align="center">Checking Out books</h1>
+
+<FORM METHOD="POST" ACTION="docheckout">
+  <p align="center" style="width: 200px;">
+    <%= "Select User: "%>
+    <%= select_tag 'user_id', options_for_select(@users.collect{ |u| [u.name, u.id] }) %>
+  </p>
+<table border="2", style="width:1000px;", align="center">
+  <tr>
+  	<th align='center', class="field-title">Select</th>
+    <th align='center', class="field-title"><form><input name="sort" type="submit" value="Name" style="width:100%" formaction="books"></form></th>
+    <th align='center', class="field-title"><form><input name="sort" type=submit value="Description" style="width:100%" formaction="books"></form></th>
+    <th align='center', class="field-title"><form><input name="sort" type=submit value="Author" style="width:100%" formaction="books"></form></th>
+    <th align="center", class="field-title">Publisher</th>
+    <th align="center", class="field-title">QR Code</th>
+  </tr>
+
+<% @books.each do |book| %>
+  <tr>
+    <td><%= check_box_tag "tag_ids[]", book.id %></td>
+    <td class="field-title"><%= book.name %></td>
+    <td class="field-title"><%= book.description %></td>
+    <td class="field-title"><%= book.author %></td>
+    <td class="field-title"><% if book.publisher.present? %>
+            <%= book.publisher.name %>
+        <% else %>
+            <% "" %>
+        <% end %>
+    </td>
+    <td class="field-title"><img src = "data:image/png;base64,<%=book.barcode%>" alt="QR not available" border="1" height="100" width="100"/></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+  <p style="width: 1200px;" align="center"><input type="submit" name="submit" value="checkout" align="center" style="width: 150px;"></p>
+</FORM>
